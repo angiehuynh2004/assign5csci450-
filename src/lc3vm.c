@@ -528,31 +528,22 @@ void res(uint16_t i)
  */
 void trap(uint16_t i)
 {
-  uint16_t vector = i & 0xFF;
+  uint16_t original_psr = reg[PSR];
 
-  // switch to supervisor mode if needed
   if (is_user_mode())
   {
-    uint16_t usp = reg[R6];
-    reg[USP] = usp;
-
+    reg[USP] = reg[R6];
     reg[R6] = reg[SSP];
+
     supervisor_mode();
   }
 
-  // push state
   push(reg[RPC]);
-  push(reg[PSR]);
+  push(original_psr);
 
-  // jump to handler
-  reg[RPC] = mem_read(vector);
-
-  // ✅ HALT MUST BE AFTER SETTING PC
-  if (vector == 0x25)
-  {
-    disable_clock();
-  }
+  reg[RPC] = mem_read(0x0000 + TRP(i));
 }
+
 /**
  * LC-3 instruction microcode store / lookup table.  Need to define array
  * of function pointers with all (microcode) functions inserted in
