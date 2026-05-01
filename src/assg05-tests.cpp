@@ -17,19 +17,19 @@ using namespace std;
 #define TEST
 #include "lc3vm.h"
 
-#undef task1_1
-#undef task1_2
-#undef task2
-#undef task3
-#undef task4_1
-#undef task4_2
-#undef task5
-#undef task6_1
-#undef task6_2
-#undef task7_1
-#undef task7_2
-#undef task7_3
-#undef task7_4
+#define task1_1
+#define task1_2
+#define task2
+#define task3
+#define task4_1
+#define task4_2
+#define task5
+#define task6_1
+#define task6_2
+#define task7_1
+#define task7_2
+#define task7_3
+#define task7_4
 
 /**
  * @brief Task 1: Test privilege and priority functions in PSR
